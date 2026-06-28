@@ -2,17 +2,13 @@
  * cotacao.c — Servidor de Cotação (porta 8001)
  *
  * [Message Expiration — papel de Sender/Remetente]
- * Este serviço é o REMETENTE no padrão Message Expiration (EIP).
- * Ele embute na resposta os campos timestamp_emissao_ms e ttl_ms,
+ * Embute na resposta os campos timestamp_emissao_ms e ttl_ms,
  * permitindo que o receptor (operacao.c) valide a expiração da mensagem
  * antes de prosseguir com cada etapa da Saga.
  *
  * [Request-Reply — papel de Replier]
  * Implementa o lado servidor do padrão: socket→bind→listen→accept→
  * recv(req)→processa→send(reply)→close, em loop infinito.
- *
- * Uso: ./cotacao <taxa_sucesso> <tempo_processamento_ms> <ttl_cotacao_ms> [porta]
- * Ex:  ./cotacao 0.9 50 300
  */
 
 #include <stdio.h>

@@ -5,9 +5,6 @@
  * Implementa o padrão Request-Reply: recebe MsgRequisicaoRisco,
  * analisa os preços da cotação, retorna MsgRespostaRisco com a decisão.
  * Cada requisição é atendida em uma conexão TCP independente.
- *
- * Uso: ./risco <taxa_sucesso> <tempo_processamento_ms> [porta]
- * Ex:  ./risco 0.8 100
  */
 
 #include <stdio.h>

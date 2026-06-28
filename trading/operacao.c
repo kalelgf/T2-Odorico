@@ -16,10 +16,6 @@
  * A cotação recebida carrega timestamp_emissao_ms e ttl_ms. O orquestrador
  * valida a expiração em 3 pontos: antes do risco, antes da compra 1 e antes
  * da compra 2. Cotação expirada dispara a compensação quando necessário.
- *
- * Uso: ./operacao <N_ordens> [host_cotacao] [host_risco] [host_compra]
- * Ex:  ./operacao 5
- *      ./operacao 5 127.0.0.1 127.0.0.1 127.0.0.1
  */
 
 #include <stdio.h>
@@ -246,7 +242,7 @@ static void executar_saga(const ConfigOperacao *cfg, int n_ordem) {
 
     /* -----------------------------------------------------------------------
      * [Message Expiration] Verificação 1: antes de consultar o risco.
-     * Se a cotação já expirou, a ordem é descartada (Dead Letter Channel).
+     * Se a cotação já expirou, a ordem é descartada.
      * ----------------------------------------------------------------------- */
     if (cotacao_expirada(&cotacao)) {
         estado = SAGA_FALHA_TTL;
@@ -256,7 +252,7 @@ static void executar_saga(const ConfigOperacao *cfg, int n_ordem) {
     }
 
     /* -----------------------------------------------------------------------
-     * Etapa 2: [Request-Reply] Análise de risco (ponto pivô da Saga)
+     * Etapa 2: [Request-Reply] Análise de risco
      * Após aprovação do risco, o sistema assume compromisso de completar ou
      * compensar — não é mais permitido simplesmente abandonar a operação.
      * ----------------------------------------------------------------------- */

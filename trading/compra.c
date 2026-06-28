@@ -7,12 +7,9 @@
  * [Saga — transação compensatória]
  * Operações do tipo OP_VENDA representam transações compensatórias disparadas
  * pelo orquestrador (operacao.c) para desfazer uma compra anterior.
- * Por simplificação válida do protótipo, vendas (compensações) SEMPRE retornam
- * sucesso — na prática real, uma venda a mercado pode ter latência mas raramente
- * falha de forma definitiva, especialmente em janelas de compensação curtas.
- *
- * Uso: ./compra <taxa_sucesso> <tempo_processamento_ms> [porta]
- * Ex:  ./compra 0.7 80
+ * Por simplificação do protótipo, vendas (compensações) SEMPRE retornam
+ * sucesso, uma venda a mercado pode ter latência mas raramente
+ * falha de forma definitiva.
  */
 
 #include <stdio.h>
